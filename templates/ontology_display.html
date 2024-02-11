@@ -1,0 +1,70 @@
+<div>
+
+    <script>
+
+        window.onerror = (event, source, lineno, colno, error) => {
+            document.body.append(event)
+            document.body.append(lineno)
+            document.body.append(error)
+        };
+    </script>
+    <div class="mx-auto flex" style="max-width: 600px;">
+        <div id="graph" class="flex flex-1 columns-1 flex-col">
+        </div>
+        <div id="p5canvas" class="flex flex-1 columns-1 flex-col"></div>
+    </div>
+
+    <script type="module">
+        Viz.instance().then(function(viz) {
+            var svg = viz.renderSVGElement(`{{dot_graph_spec|safe}}`);
+            document.getElementById("graph").appendChild(svg);
+        });
+    </script>
+    <script type="module">
+        // Create a new SpeechSynthesisUtterance object
+        let utterance = new SpeechSynthesisUtterance();
+
+        // Set the text and voice of the utterance
+        utterance.text = `{{voicable_description}}`;
+        utterance.voice = window.speechSynthesis.getVoices()[Math.floor(Math.random() * window.speechSynthesis.getVoices().length)];
+
+        // Speak the utterance
+        // window.speechSynthesis.speak(utterance);
+
+    </script>
+    <script type="module">
+        // Create a new polyphonic synthesizer
+        const polySynth = new Tone.PolySynth().toMaster();
+
+
+        {{serialized_tone_js_song|safe}}
+
+        // Function to play the melody in a loop
+        function playMelodyInLoop() {
+            let currentTime = Tone.now();
+            melody.forEach(({ note, duration, startTime }) => {
+                const absoluteStartTime = currentTime + parseFloat(startTime);
+                polySynth.triggerAttackRelease(note, duration, absoluteStartTime);
+            });
+            // Calculate total duration of the loop
+            const loopDuration = melody.reduce((acc, { duration, startTime }) => {
+                return Math.max(acc, parseFloat(startTime) + Tone.Time(duration).toSeconds());
+            }, 0);
+            // Schedule the next iteration of the loop
+            setTimeout(playMelodyInLoop, loopDuration * 1000);
+        }
+
+        // Start playing the melody loop
+        playMelodyInLoop();
+
+
+    </script>
+
+    <script type="module">
+
+        {{p5_spec|safe}}
+
+        let something_chat_gpt_wont_clobber = new p5(sketch);
+
+    </script>
+</div>

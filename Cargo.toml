@@ -1,0 +1,20 @@
+[package]
+name = "next-thing-plugin-server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.3.1"
+askama = { version = "0.12.0", features = ["with-actix-web"] }
+askama_actix = "0.14.0"
+chrono = { version = "0.4.26", features = ["serde"] }
+env_logger = "0.10.0"
+serde = { version = "1.0.164", features = ["derive"] }
+sha2 = "0.10.7"
+dotenvy = "0.15"
+log = "0.4.19"
+lazy_static = "1.4.0"
+async-openai = "0.12.1"
+actix-files = "0.6.5"
