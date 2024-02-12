@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@viz-js/lang-dot": "^1.0.4",
-    "@viz-js/viz": "^3.2.4",
-    "js-3d-model-viewer": "^0.2.2",
-    "three": "^0.161.0"
-  }
-}
