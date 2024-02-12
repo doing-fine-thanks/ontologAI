@@ -1,19 +1,20 @@
-<div>
 
     <script>
-
         window.onerror = (event, source, lineno, colno, error) => {
-            document.body.append(event)
-            document.body.append(lineno)
-            document.body.append(error)
+            document.body.append("E@ " + lineno + ": " + event + " / " + error);
+            if(!document.getElementById("#source")) {
+                var pre = document.createElement("pre");
+                pre.id = "source"
+                pre.style.position = "absolute"
+                pre.style.color = "red";
+                pre.style.zIndex = -1;
+                pre.textContent = document.body.innerHTML.trim();
+                document.body.appendChild(pre);
+            }
         };
     </script>
-    <div class="mx-auto flex" style="max-width: 600px;">
-        <div id="graph" class="flex flex-1 columns-1 flex-col">
-        </div>
-        <div id="p5canvas" class="flex flex-1 columns-1 flex-col"></div>
-    </div>
-
+    <div id="graph" class=""></div>
+    <div id="p5canvas" class=""></div>
     <script type="module">
         Viz.instance().then(function(viz) {
             var svg = viz.renderSVGElement(`{{dot_graph_spec|safe}}`);
@@ -59,7 +60,6 @@
 
 
     </script>
-
     <script type="module">
 
         {{p5_spec|safe}}
@@ -67,4 +67,6 @@
         let something_chat_gpt_wont_clobber = new p5(sketch);
 
     </script>
-</div>
+    <div>
+        {{svg_spec|safe}}
+    </div>

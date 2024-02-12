@@ -4,7 +4,6 @@ use env_logger;
 use lazy_static::lazy_static;
 use log::info;
 use std::env;
-use actix_files as fs;
 
 use crate::chat::create_ontological_representation;
 use crate::requests::SearchTermRequest;
@@ -67,7 +66,6 @@ async fn main() -> std::io::Result<()> {
             .service(echo)
             .service(index)
             .service(show)
-            .service(fs::Files::new("/static", "./static").show_files_listing())
             .default_service(web::to(default_not_found))
             .wrap(Logger::default())
     })

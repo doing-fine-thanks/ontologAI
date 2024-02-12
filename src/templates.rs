@@ -11,4 +11,5 @@ pub struct OntologicalRepresentationsTemplate {
     pub dot_graph_spec: String,
     pub serialized_tone_js_song: String,
     pub voicable_description: String,
+    pub svg_spec: String
 }

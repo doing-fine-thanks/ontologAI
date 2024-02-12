@@ -1,5 +1,5 @@
 [package]
-name = "next-thing-plugin-server"
+name = "ontologai"
 version = "0.1.0"
 edition = "2021"
 
@@ -18,3 +18,4 @@ log = "0.4.19"
 lazy_static = "1.4.0"
 async-openai = "0.12.1"
 actix-files = "0.6.5"
+futures = "0.3.30"
